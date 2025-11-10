@@ -68,7 +68,7 @@ By the end of this module, you will:
 4. **Select a System/Deployment Name:**
    - No spaces, use e.g., `dev-summit-workshop`
    - Press `Next`.
-   - Dependencies will be installed on the host.
+   - All dependencies will be automatically installed on the host.
 
 5. **Choose Default Storage Settings:**
    - Accept the defaults and press `Next`.
