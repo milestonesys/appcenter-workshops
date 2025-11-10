@@ -38,6 +38,7 @@ By the end of this module, you will:
    The Runtime Installer is already available on the machine. To make it easier for you, an alias named `runtime-installer` including the necessary parameters to setup the development environment is available on the system.
 
    **Note:** 
+   The alias `runtime-installer` mentioned above includes the following parameters when running the installer:
    - `--cluster-sandbox` will set up a local sandbox repository to test your apps.
    - `--cluster-dev-mode` will set up the environment for development purposes, including the Kubernetes and Helm dashboards to ease debugging and development.
    - If you want to see the parameters used, you can check the wrapper script by running `cat ~/bin/runtime-installer` in the terminal.
@@ -55,12 +56,14 @@ By the end of this module, you will:
    - And press `Start`.
 
 3. **Connect to Runtime Platform host:**
-   - For the workshop this is the **same machine as you are working on**, so use the IP shown in the terminal title:
+   - For the workshop this is the **same machine as you are working on**, you can find the private IP multiple ways:
+     1. Look at the handout provided to you during the workshop.
+     2. Locate IP shown in the terminal title:
      
-     ![](img/ip.png)
-   - Or find it by invoking following command: `ip a | grep enX0`
+         ![](img/ip.png)
+     3. Or find it by invoking following command: `ip a | grep enX0`
      
-     ![](img/ip2.png)
+         ![](img/ip2.png)
    - **User name** is the same as you use to log into the VM (ubuntu).
    - **Password** is either the one you changed it to, or the original one if you didn't.
    - Press `Next`.
@@ -94,7 +97,7 @@ By the end of this module, you will:
    - Navigate to "Find new apps", filter on "Video OS" and select "Httpd Webgl".
      - Have a look at the overview and press "Install".
      - Once the installed toaster pops-up and the state is no longer "Installing", press the app in the list and look at logs and metrics to see that it is running.
-     - Navigate to `http://<cluster ip>/httpd-webgl` to see the application in action.
+     - Navigate to `http://<ip of your machine>/httpd-webgl` to see the application in action.
        - Note that it might take a moment for the routing rules to be applied. If you get an RBAC error, wait a moment and refresh.
    - If you see a globe and a spinning cube, the application is running successfully!
 
@@ -118,8 +121,11 @@ Before proceeding to Module 2, ensure you have:
 
 **App Center Connection Issues:**
 - Verify XProtect server credentials
+  - Did you enter the correct IP, username, and password from the credentials sheet?
 - Check network connectivity
+  - Can you ping the XProtect server from the terminal?
 - Ensure XProtect VMS is running
+  - Ask instructor to verify the server status
 
 **Sample Application Won't Install:**
 - Verify Runtime Platform is operational

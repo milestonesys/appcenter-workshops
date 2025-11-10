@@ -46,7 +46,7 @@ By the end of this module, you will:
      - **Partner**: Partner Applications
      - **Sandbox**: This is where your development apps will appear
 
-   **Note:**: These categories/filters might be subject to change.
+   **Note:** These categories/filters might be subject to change.
 
 2. **Application Details:**
    - Click on various applications to view:
@@ -65,7 +65,7 @@ By the end of this module, you will:
 
 2. **Application Monitoring:**
    - View metrics and logs for the installed application.
-     - Naviagate to the app under "Installed apps".
+     - Navigate to the app under "Installed apps".
      - Look at data available under the different tabs.
   
 3. **Application Management:**

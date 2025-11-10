@@ -20,6 +20,33 @@ By the end of this module, you will:
 - Visual Studio Code with terminal access
 - Runtime Platform and App Center operational
 
+## 📝 Important Setup Note
+
+### AI Bridge Sample Requirement
+
+Before working with the **AI Bridge sample**, you need to manually create an application registration secret.
+
+**Why is this needed?**
+- The AI Bridge sample requires the processing server
+- Normally, this would be installed via the Management Client plugin for App Center
+- The Management Client would automatically create the required secret
+- Since the Management Client is not available in this workshop environment, manual setup is required
+
+**Setup Steps:**
+1. If not logged in already, log in with app-builder:
+   ```bash
+   app-builder login
+   ```
+
+2. Create the application registration secret:
+   ```bash
+   create-app-registration-secret
+   ```
+
+3. Proceed with the AI Bridge sample deployment as documented
+
+> ⚠️ **Note:** This manual step is only required for the AI Bridge sample and only in workshop environments without Management Client access.
+
 ## 🚀 Step-by-Step Instructions
 
 ### Step 1: Clone the Official Sample Repository (5 minutes)
@@ -59,7 +86,7 @@ By the end of this module, you will:
    ```
 
 3. **Review Documentation:**
-   - Open and read the main `README.md`
+   - Open and read the main `README.md` in the root of the repository.
    - Review each sample's individual documentation
    - Understand prerequisites and requirements
 
@@ -114,10 +141,10 @@ Before completing the workshop, ensure you have:
 ### Common Issues:
 
 **Build Failures:**
-- Depends of the tech stack
-- Verify all dependencies are installed
-- Review build logs for specific errors
-- Ensure app.yaml is valid
+- Build failures can vary depending on the tech stack, but some general tips:
+  - Verify all dependencies are installed
+  - Review build logs for specific errors
+  - Ensure app.yaml is valid
 
 **Deployment Issues:**
 - Verify Runtime Platform capacity

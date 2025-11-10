@@ -179,15 +179,17 @@ Navigate to [📁 `./module-1-setup/`](./module-1-setup/README.md) and follow th
 - [Runtime Installation Guide](https://download.milestonesys.com/app-builder/Documentation/Runtime%20Installation%20Wizard.pdf)
 - [App Builder Reference](https://download.milestonesys.com/app-builder/Documentation/App-Builder.pdf)
 
+The two documents above are also available locally in the development environment under `~/Documents`.
+
 ### Community
-- [Developer Forum](https://developer.milestonesys.com/forum/)
+- [Developer Forum](https://developer.milestonesys.com)
 - [App Center Sample Applications](https://github.com/milestonesys/appcenter-samples)
 
 ## 🤝 Support & Feedback
 
 - **Workshop Issues:** Create an issue in this repository
 - **Technical Support:** Contact your Milestone partner representative
-- **Documentation Feedback:** [Submit feedback](https://doc.milestonesys.com/feedback/)
+<!-- - **Documentation Feedback:** [Submit feedback](https://doc.milestonesys.com/feedback/) -->
 
 <!-- ## 📄 License
 
