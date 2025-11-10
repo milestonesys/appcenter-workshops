@@ -1,6 +1,6 @@
 # Developer Summit 2025 - XProtect Runtime Platform Workshop
 
-Welcome to the hands-on workshop for Milestone's new Runtime Platform, App Center, and App Builder! This repository contains everything you need to get started building applications on the Milestone ecosystem.
+Welcome to the hands-on workshop for Milestone's new Runtime Platform, App Center, and App Builder! This repository contains everything you need to get started building applications in the Milestone ecosystem.
 
 ## 🎯 Workshop Overview
 
