@@ -38,7 +38,7 @@ By the end of this module, you will:
    # Key commands to explore:
    app-builder -h      # Shows available commands/help
    app-builder login   # Login to the Runtime Platform to interact with it
-   app-builder build   # Build App as Helm Chart (the defaul command)
+   app-builder build   # Build App as Helm Chart (the default command)
    app-builder push    # Push app to the sandbox repository
    ```
 
