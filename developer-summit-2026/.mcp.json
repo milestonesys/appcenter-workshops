@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "app-platform-knowledge": {
+      "command": "npx",
+      "args": ["-y", "@milestone/app-platform-knowledge-mcp-server"]
+    }
+  }
+}
