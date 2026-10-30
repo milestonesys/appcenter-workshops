@@ -4,13 +4,14 @@
 
 **Goal:** a project folder running in the dev container, with your AI agent logged in, access to Milestone's npm packages, and a connection to the shared App Platform.
 
-## Step 1: Create your project folder
+## Step 1: Enter your project folder
 
-Create the folder under your home directory (on Windows, your WSL home), and copy the dev container template into it:
+You've already created the folder under your home directory (on Windows, your WSL home) and copied the dev container template into it.
+
+Enter the devcontainer folder:
 
 ```bash
-mkdir -p ~/workspace/dev-summit-2026 && cd ~/workspace/dev-summit-2026
-cp -r /path/to/.devcontainer .     # TODO: final template location
+cd ~/workspace/dev-summit-2026
 ```
 
 ## Step 2: Add your AI agent
@@ -19,7 +20,7 @@ Open `.devcontainer/devcontainer.json`. Under `"features"`, uncomment the line f
 
 > ⚠️ Don't change anything else in the file. The mount settings are what make App Builder work from inside the container.
 
-## Step 3: Open the dev container
+## Step 3: Open the dev container in VS Code
 
 ```bash
 code .

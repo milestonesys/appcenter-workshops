@@ -27,15 +27,14 @@ Install [VS Code](https://code.visualstudio.com/) and the [Dev Containers extens
 - **Windows:** use WSL2 with Docker available inside WSL, keep your projects in the WSL filesystem, and enable the VS Code setting *Dev > Containers: Execute In WSL*.
 - **Apple silicon Mac:** in Docker Desktop, enable *Use Rosetta for x86_64/amd64 emulation* and give Docker 4+ CPUs and 8+ GB memory.
 
-## 3. Download the dev container
+## 3. Download the dev container and app builder
 
 Pull the image (a few GB, so please don't do this at the venue):
 
 ```bash
-docker pull ghcr.io/jakobnielsen/app-platform-dev-container:latest
+docker pull runtimeplatform.azurecr.io/videoos.io/app-platform-dev-container:latest
+docker pull runtimeplatform.azurecr.io/videoos.io/app-builder:2.5.0
 ```
-
-Download the `.devcontainer/` template folder from: **TODO: link**.
 
 ## 4. Accounts
 
