@@ -1,0 +1,66 @@
+{
+    "name": "App Platform Dev Container",
+    "image": "runtimeplatform.azurecr.io/videoos.io/app-platform-dev-container:latest",
+
+    // App Builder hands host paths to the host's Docker daemon (docker-outside-of-docker). Mounting the workspace at its host path -- rather than the default /workspaces/<name> -- keeps paths identical inside and outside, so bind mounts of app-definition.yaml, custom definitions and assets resolve correctly.
+    "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind,consistency=cached",
+    "workspaceFolder": "${localWorkspaceFolder}",
+
+    // Runs on the HOST before the container is created. The devcontainer CLI mounts with `docker run --mount`, which -- unlike `-v` -- refuses to create a missing bind source and fails with 'bind source path does not exist'. A fresh machine or a CI runner has no ~/.kube, so create it up front.
+    "initializeCommand": "mkdir -p ${localEnv:HOME}/.kube",
+
+    // Same reasoning for the kubeconfig: mounted at the host path, then linked to ~/.kube by app-platform-init.
+    "mounts": [
+        "source=${localEnv:HOME}/.kube,target=${localEnv:HOME}/.kube,type=bind,consistency=cached"
+    ],
+    "containerEnv": {
+        "HOST_HOME": "${localEnv:HOME}"
+    },
+    "postCreateCommand": "app-platform-init",
+
+    // The image already ships docker-outside-of-docker, kubectl, Helm, Node.js, Task, python3, the OpenSSH client and App Builder.
+    // Language-specific runtimes and other optional tools are opt-in: uncomment the entries below (or add others from https://containers.dev/features) for your project.
+    // Consumer-side features are applied on top of the published image when the container is (re)built, so removing an entry and rebuilding gives you back the disk space.
+    "features": {
+        // Uncomment to add the .NET SDK (~550 MB). Change `version` to pin a specific SDK/runtime.
+        // "ghcr.io/devcontainers/features/dotnet:2": { "version": "10.0" },
+
+        // Uncomment to add the Go toolchain (~450 MB). Change `version` to pin a specific Go release, e.g. \"1.24\".
+        // "ghcr.io/devcontainers/features/go:1": { "version": "latest" },
+
+        // Uncomment to add the OpenCode AI coding agent CLI (~180 MB). Change `version` to pin a specific release, e.g. \"1.18.33\".
+        // "ghcr.io/devcontainers-extra/features/opencode:1": { "version": "latest" },
+
+        // Uncomment to add the GitHub Copilot CLI (~180 MB). Requires a GitHub Copilot subscription. Change `version` to pin a specific release, e.g. \"1.0.91\".
+        // "ghcr.io/devcontainers/features/copilot-cli:1": { "version": "latest" },
+
+        // Uncomment to add the Claude Code CLI plus its VS Code extension (~430 MB). Requires a Claude subscription or an Anthropic API key. Always installs the latest release.
+        // "ghcr.io/anthropics/devcontainer-features/claude-code:1": {},
+
+        // Codex and Gemini both use the generic npm package feature, which can be listed only once -- uncomment ONE of the two entries below, not both.
+        // Uncomment to add the OpenAI Codex CLI (~630 MB). Requires a ChatGPT plan or an OpenAI API key. Change `version` to pin a specific release, e.g. \"0.160.0\".
+        // "ghcr.io/devcontainers-extra/features/npm-package:1": { "package": "@openai/codex", "version": "latest" }
+
+        // OR uncomment to add the Google Gemini CLI (~200 MB). Requires a Google account or a Gemini API key. Change `version` to pin a specific release, e.g. \"0.62.0\".
+        // "ghcr.io/devcontainers-extra/features/npm-package:1": { "package": "@google/gemini-cli", "version": "latest" }
+
+        // Find additional features here: https://containers.dev/features
+    },
+
+    "remoteUser": "vscode",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-kubernetes-tools.vscode-kubernetes-tools",
+                "ms-azuretools.vscode-docker",
+                "redhat.vscode-yaml"
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "files.associations": {
+                    "app-definition.yaml": "yaml"
+                }
+            }
+        }
+    }
+}

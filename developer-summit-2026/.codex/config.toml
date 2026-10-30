@@ -1,0 +1,9 @@
+# Codex only loads this file once the project is marked as trusted.
+
+[mcp_servers.app-platform-knowledge]
+command = "npx"
+args = ["-y", "@milestone/app-platform-knowledge-mcp-server"]
+
+[mcp_servers.mui]
+command = "npx"
+args = ["--registry", "https://registry.npmjs.org", "-y", "@mui/mcp@latest"]
