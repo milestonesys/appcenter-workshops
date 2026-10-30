@@ -11,23 +11,9 @@ Run everything from your **project root** (e.g. `~/workspace/dev-summit-2026/jd-
 ```bash
 export APP=jd-health-dashboard           # your app name
 export VERSION=1.0.0
-export SANDBOX=<sandbox-host>:5000       # from your handout
 ```
 
-## Step 2: Build and push the container image
-
-The Docker build needs your npm token. This passes it in as a build secret, so it doesn't end up in the image:
-
-```bash
-sed -i 's#^RUN \(.*npm ci\)#RUN --mount=type=secret,id=npmrc,target=/root/.npmrc \1#' Dockerfile
-
-docker build --secret id=npmrc,src=$HOME/.npmrc -t $SANDBOX/sandbox.io/$APP/$APP:$VERSION .
-docker push $SANDBOX/sandbox.io/$APP/$APP:$VERSION
-```
-
-The first build takes a few minutes.
-
-## Step 3: Create the app definition
+## Step 2: Create the app definition
 
 Fill in the placeholders in `app-definition-template.yaml`:
 
@@ -45,17 +31,22 @@ awk -v v="$VERSION" -v repo="sandbox.io/$APP" '
 
 > 💡 Optional: ask your agent to describe your app in `docs/readme.md` first. App Center shows that text.
 
-## Step 4: Push the app with App Builder
+## Step 3: Push the app with App Builder
 
 ```bash
-app-builder build
 app-builder push
 app-builder list      # your app should be listed
 ```
 
-## Step 5: Install from App Center
+## Step 4: Install the app
 
-Open **App Center** (URL on your handout) and log in. Find your app among the sandbox apps and click **Install**. Wait until it shows *Installed*.
+```bash
+app-builder install-from-repo
+```
+
+## Step 5: Check it in App Center
+
+Open **App Center** (URL on your handout) and log in. Find your app among the sandbox apps and wait until it shows *Installed*.
 
 ## Step 6: Open it in Smart Client
 
@@ -72,9 +63,11 @@ At the end of the session, uninstall your app in App Center. The platform is sha
 
 ## 🔁 Shipping a new version
 
-Bump `VERSION`, then repeat Steps 2-4 and upgrade the app in App Center.
+Bump `VERSION` (e.g. `export VERSION=1.0.1`), then repeat Steps 2-4. `install-from-repo` needs a new version each time, so always bump before you install again.
 
 > 💡 Tip: ask your agent to turn these steps into a `Taskfile.yml`.
+
+> **TODO:** Provide a ready-made `Taskfile.yml` or `Makefile` that bumps the version, creates the app definition, pushes and installs in one command.
 
 ## ✅ Done when
 
