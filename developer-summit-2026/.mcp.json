@@ -3,6 +3,10 @@
     "app-platform-knowledge": {
       "command": "npx",
       "args": ["-y", "@milestone/app-platform-knowledge-mcp-server"]
+    },
+    "mui": {
+      "command": "npx",
+      "args": ["--registry", "https://registry.npmjs.org", "-y", "@mui/mcp@latest"]
     }
   }
 }

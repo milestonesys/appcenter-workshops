@@ -1,0 +1,21 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "servers": {
+      "app-platform-knowledge": {
+        "type": "local",
+        "command": ["npx", "-y", "@milestone/app-platform-knowledge-mcp-server"]
+      },
+      "mui": {
+        "type": "local",
+        "command": [
+          "npx",
+          "--registry",
+          "https://registry.npmjs.org",
+          "-y",
+          "@mui/mcp@latest"
+        ]
+      }
+    }
+  }
+}
