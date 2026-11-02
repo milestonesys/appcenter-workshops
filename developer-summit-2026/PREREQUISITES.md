@@ -15,10 +15,8 @@ Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) or an 
 Then allow the workshop's sandbox registry. In Docker Desktop, go to **Settings → Docker Engine**, add this and click *Apply & restart*:
 
 ```json
-"insecure-registries": ["<workshop-sandbox-host>:5000"]
+"insecure-registries": ["192.168.0.101:5000"]
 ```
-
-> **TODO:** Fill in the sandbox host.
 
 ## 2. Install VS Code
 
@@ -29,7 +27,7 @@ Install [VS Code](https://code.visualstudio.com/) and the [Dev Containers extens
 
 ## 3. Download the dev container and app builder
 
-Pull the image (a few GB, so please don't do this at the venue):
+Pull the image (a few gigabytes, so please do this before you arrive at the breakout session):
 
 ```bash
 docker pull runtimeplatform.azurecr.io/videoos.io/app-platform-dev-container:latest
@@ -38,20 +36,19 @@ docker pull runtimeplatform.azurecr.io/videoos.io/app-builder:2.5.0
 
 ## 4. Accounts
 
-- **Milestone Developer Portal account.** Needed to install Milestone's npm packages. **TODO:** link to sign-up.
+- **Milestone Developer Portal account.** Needed to install Milestone's npm packages and read documentation. Sign up through [Milestone Technology Partner Program](https://www.milestonesys.com/partners/technology-partner-program/).
 - **An AI coding agent.** Claude Code, GitHub Copilot CLI, OpenAI Codex, Gemini CLI, or [OpenCode](https://opencode.ai). OpenCode works without an account, using free models, but these are less capable and may use your prompts for training.
 
 ## 5. Smart Client (optional)
 
-If you have **XProtect Smart Client 2026 R1** or newer, install the **workshop certificate** we've sent you on that machine. Otherwise, borrow one of our Smart Client VMs at the workshop.
-
-> **TODO:** Attach the certificate and describe how to install it.
+If you have **XProtect Smart Client 2026 R1 Update 8** or newer on your machine, install the **workshop certificate**, as described in [smart-client-certificate/README.md](smart-client-certificate/README.md). Otherwise, borrow one of our Smart Client VMs at the workshop or a borrowed laptop.
 
 ## 6. Smoke test
 
-1. Create an empty folder and copy `.devcontainer/` into it.
-2. Open the folder in VS Code and choose **Reopen in Container**.
-3. In the VS Code terminal, run:
+1. Open the `developer-summit-2026` folder as the root folder in VS Code.
+2. Choose **Reopen in Container** when prompted by VS Code.
+3. It might take a moment up to a few minutes for the container to build and start.
+4. Open a new VS Code terminal, run:
    ```bash
    node -v && helm version && app-builder -h
    ```
