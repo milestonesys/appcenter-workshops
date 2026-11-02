@@ -1,7 +1,5 @@
 # Prerequisites
 
-> 📝 **Draft. Subject to change before the summit.**
-
 Please do this **before you arrive**. It takes 30-45 minutes, mostly downloading. All tools (Node.js, App Builder, kubectl, Helm, ...) come pre-installed in a **dev container**, so you only need Docker and VS Code on your machine.
 
 You need macOS, Linux, or Windows with [WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install) (native Windows is not supported), and 8 GB+ RAM available to Docker.
@@ -44,12 +42,14 @@ docker pull runtimeplatform.azurecr.io/videoos.io/app-builder:2.5.0
 
 ## 4. Accounts
 
-- **Milestone Developer Portal account.** Needed to install Milestone's npm packages and read documentation. Sign up through [Milestone Technology Partner Program](https://www.milestonesys.com/partners/technology-partner-program/).
+- **Milestone Developer Portal account.** Needed to install Milestone's NPM packages and read documentation. If you are not a tech partner yet, we can supply a temporary account to access the NPM packages for the workshop.
 - **An AI coding agent.** Claude Code, GitHub Copilot CLI, OpenAI Codex, Gemini CLI, or [OpenCode](https://opencode.ai). OpenCode works without an account, using free models, but these are less capable and may use your prompts for training.
 
 ## 5. Smart Client (optional)
 
-If running on Windows it is beneficial to have **XProtect Smart Client 2026 R1 Update 8** (or newer) installed on your machine. Install the **workshop certificate**, as described in [smart-client-certificate/README.md](smart-client-certificate/README.md). Otherwise, you can use one of our Smart Client VMs at the workshop or borrow a laptop for testing.
+If running on Windows it is beneficial to have **XProtect Smart Client 2026 R1 Update 8** (or newer) installed on your machine. Get it here: [XProtect Smart Client download](https://www.milestonesys.com/my-milestone/download-software/?prod=2196&type=11&ver=2238&lang=27).
+
+Install the **workshop certificate**, as described in [smart-client-certificate/README.md](smart-client-certificate/README.md). Otherwise, you can use one of our Smart Client VMs at the workshop or borrow a laptop for testing.
 
 ## 6. Smoke test
 
