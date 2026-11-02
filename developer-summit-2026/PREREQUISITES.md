@@ -4,7 +4,7 @@
 
 Please do this **before you arrive**. It takes 30-45 minutes, mostly downloading. All tools (Node.js, App Builder, kubectl, Helm, ...) come pre-installed in a **dev container**, so you only need Docker and VS Code on your machine.
 
-You need macOS, Linux, or Windows with **WSL2** (native Windows is not supported), and 8 GB+ RAM available to Docker.
+You need macOS, Linux, or Windows with [WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install) (native Windows is not supported), and 8 GB+ RAM available to Docker.
 
 ## 1. Install Docker
 
@@ -16,6 +16,14 @@ Then allow the workshop's sandbox registry. In Docker Desktop, go to **Settings 
 
 ```json
 "insecure-registries": ["192.168.0.101:5000"]
+```
+### Docker Engine
+Using Docker Engine instead of Docker Desktop, you can add the insecure registry by editing the Docker daemon configuration file, typically located at `/etc/docker/daemon.json`, and adding the above insecure registry configuration.
+
+Then restart the Docker service:
+
+```bash
+sudo systemctl restart docker
 ```
 
 ## 2. Install VS Code
@@ -41,7 +49,7 @@ docker pull runtimeplatform.azurecr.io/videoos.io/app-builder:2.5.0
 
 ## 5. Smart Client (optional)
 
-If you have **XProtect Smart Client 2026 R1 Update 8** or newer on your machine, install the **workshop certificate**, as described in [smart-client-certificate/README.md](smart-client-certificate/README.md). Otherwise, borrow one of our Smart Client VMs at the workshop or a borrowed laptop.
+If running on Windows it is beneficial to have **XProtect Smart Client 2026 R1 Update 8** (or newer) installed on your machine. Install the **workshop certificate**, as described in [smart-client-certificate/README.md](smart-client-certificate/README.md). Otherwise, you can use one of our Smart Client VMs at the workshop or borrow a laptop for testing.
 
 ## 6. Smoke test
 
