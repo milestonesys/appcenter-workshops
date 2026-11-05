@@ -2,12 +2,13 @@
 
 **Duration:** ~15 minutes
 
-**Goal:** a generated MFE running locally, with your AI agent connected to Milestone's MCP server and agent skills.
+**Goal:** a generated MFE running locally.
+
+You're already in your workshop folder (`developer-summit-2026`) from Module 1. Run the commands below in the VS Code terminal inside the dev container.
 
 ## Step 1: Generate the MFE
 
 ```bash
-cd ~/workspace/dev-summit-2026
 npx @milestone/create-mfe-app@latest
 ```
 
@@ -15,45 +16,37 @@ Answer the prompts:
 
 | Prompt | Answer |
 | --- | --- |
-| Name | Your app name, e.g. `jd-health-dashboard` |
+| Name | **Your** app name from Module 1, e.g. `jd-health-dashboard` |
 | Realm | `devsummit` |
 | Partner or internal | `Partner` |
 | Bundler | `Webpack` |
 | Port | `3003` |
-| API URL | The App Platform URL from your handout |
+| API URL | Press **Enter** to keep the default, `http://localhost:8080` |
 
-> **TODO:** Confirm the realm and API URL for the workshop.
+> 💡 The API URL is only the target that requests to `/api` are forwarded to while you run the MFE locally with `npm start`. It doesn't affect deploying or running in Smart Client, where the MFE talks to the App Platform directly. You can change it later in `client/webpack.config.js` (the `proxy` section) if you want to test against real data locally. See the generated `client/README.md`.
 
-## Step 2: Run it locally
+This creates a project folder named after your app, e.g. `jd-health-dashboard/`, with a `client/` (the MFE) and a `server/` (the Express server that hosts it).
+
+## Step 2: Install dependencies and run it locally
+
+Install the client's dependencies and start it. Replace `jd-health-dashboard` with your app name:
 
 ```bash
 cd jd-health-dashboard/client
+npm install
 npm start
 ```
+
+`npm install` also installs the Milestone agent skills into your project (`.github/skills/`), which your AI agent uses in Module 4. The server isn't needed to run the MFE locally. You'll install and build it when you deploy in Module 3.
+
+> 💡 If `npm install` fails with a `401` error, your npm token has expired. Run `npm-auth` again (see Module 1, Step 5).
 
 Open <http://localhost:3003>. Leave it running: it reloads automatically while you work.
 
 The file you'll mostly work on is `client/src/App.tsx`.
 
-## Step 3: Start your agent in the project
-
-Open a **new terminal**, go to the project root (`jd-health-dashboard/`) and start your agent there.
-
-The project already includes:
-- **MCP server config** (`.mcp.json`, `.vscode/mcp.json`) for the Milestone App Platform knowledge MCP server
-- **Milestone agent skills** (`.github/skills/`), for example the Milestone look & feel
-
-Claude Code and Copilot in VS Code pick these up automatically. Approve the MCP servers when asked. For other agents, add this MCP server manually: `npx -y @milestone/app-platform-knowledge-mcp-server`.
-
-> **TODO:** Short per-agent notes for MCP servers and skills.
-
-Check that it works by asking your agent:
-
-> *"Which Milestone MCP tools and skills do you have? Then explain briefly how this MFE gets loaded by the shell."*
-
 ## ✅ Done when
 
 - [ ] The MFE shows at <http://localhost:3003>
-- [ ] Your agent can see the Milestone MCP server
 
-➡️ **[Module 3: Build with Your AI Agent](../module-3-build-with-ai/README.md)**
+➡️ **[Module 3: Deploy and See It in Smart Client](../module-3-deploy/README.md)**

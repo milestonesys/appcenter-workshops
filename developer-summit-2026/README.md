@@ -19,10 +19,10 @@ You build on your own laptop. We provide a shared App Platform, XProtect and (if
 
 | Module | | Duration |
 | --- | --- | --- |
-| [1. Set up your workspace](./module-1-setup/README.md) | Dev container, AI agent, npm and App Platform login | ~20 min |
-| [2. Scaffold your MFE](./module-2-create-mfe/README.md) | `create-mfe-app`, run locally, connect the agent | ~15 min |
-| [3. Build with your AI agent](./module-3-build-with-ai/README.md) | Pick a user story, prompt, iterate | ~55 min |
-| [4. Deploy and see it in Smart Client](./module-4-deploy/README.md) | Push, install, open | ~25 min |
+| [1. Set up your workspace](./module-1-setup/README.md) | Clone the repo, dev container, AI agent, npm and App Platform login | ~20 min |
+| [2. Scaffold your MFE](./module-2-create-mfe/README.md) | `create-mfe-app`, run locally | ~15 min |
+| [3. Deploy and see it in Smart Client](./module-3-deploy/README.md) | Build and push the image, push the app, install, open | ~25 min |
+| [4. Build with your AI agent](./module-4-build-with-ai/README.md) | Connect the agent, pick a user story, prompt, iterate, ship a new version | ~55 min |
 
 ## 📚 Resources
 

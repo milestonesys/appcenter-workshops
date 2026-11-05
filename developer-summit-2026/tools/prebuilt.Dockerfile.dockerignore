@@ -1,0 +1,9 @@
+# Docker uses this file instead of the project's .dockerignore when building with
+# tools/prebuilt.Dockerfile. Only send what the image needs, so node_modules and the
+# rest of your project aren't uploaded to Docker on every build.
+*
+!client/dist
+!server/dist
+!server/server.json
+!server/package.json
+!server/package-lock.json

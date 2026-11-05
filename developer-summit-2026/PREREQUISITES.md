@@ -53,7 +53,13 @@ Install the **workshop certificate**, as described in [smart-client-certificate/
 
 ## 6. Smoke test
 
-1. Open the `developer-summit-2026` folder as the root folder in VS Code.
+1. Clone the workshop repository and open the `developer-summit-2026` folder as the root folder in VS Code:
+   ```bash
+   cd ~
+   git clone https://github.com/milestonesys/appcenter-workshops.git
+   cd appcenter-workshops/developer-summit-2026
+   code .
+   ```
 2. Choose **Reopen in Container** when prompted by VS Code.
 3. It might take a moment up to a few minutes for the container to build and start.
 4. Open a new VS Code terminal, run:

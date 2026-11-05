@@ -1,0 +1,178 @@
+# Workshop tasks for building and deploying your MFE. See module-3-deploy/README.md.
+#
+# Run them from your PROJECT folder (e.g. developer-summit-2026/jd-health-dashboard).
+# Task finds this file in the parent folder by itself.
+#
+#   task            list the tasks
+#   task info       show the app name, version and image the tasks use
+#
+# Task prints every command before it runs it, so you can see exactly what happens,
+# and run the same commands yourself.
+#
+# The tasks need the project you generate in Module 2 (module-2-create-mfe/README.md).
+# The app name is read from its app-definition-template.yaml and the version from
+# client/package.json. Override either on the command line, e.g. `task info VERSION=1.0.5`.
+
+version: '3'
+
+vars:
+  PROJECT_DIR: '{{.USER_WORKING_DIR}}'
+  TEMPLATE: '{{.USER_WORKING_DIR}}/app-definition-template.yaml'
+  APP:
+    sh: yq -r '.name // empty' "{{.USER_WORKING_DIR}}/app-definition-template.yaml" 2>/dev/null || true
+  VERSION:
+    sh: node -p "require('{{.USER_WORKING_DIR}}/client/package.json').version" 2>/dev/null || true
+  REGISTRY: '192.168.0.101:5000'
+  IMAGE: 'sandbox.io/{{.APP}}/{{.APP}}'
+
+tasks:
+  default:
+    silent: true
+    cmds:
+      - "{{.TASK_EXE}} --list"
+
+  _project:
+    internal: true
+    silent: true
+    preconditions:
+      - sh: test -f "{{.PROJECT_DIR}}/client/package.json" && test -f "{{.TEMPLATE}}"
+        msg: |-
+          No MFE project found in {{.PROJECT_DIR}}.
+          The tasks need the app name and version from the project you generate in Module 2.
+          Complete Module 2 first (module-2-create-mfe/README.md), then run the tasks from
+          your project folder, e.g. `cd jd-health-dashboard` (your app name).
+      - sh: test -n "{{.APP}}" && test -n "{{.VERSION}}"
+        msg: |-
+          Could not read the app name from app-definition-template.yaml or the version
+          from client/package.json. Check that Module 2 completed without errors.
+
+  info:
+    desc: Show the app name, version and image the tasks use
+    silent: true
+    deps: [_project]
+    cmds:
+      - |
+        echo "Project folder:   {{.PROJECT_DIR}}"
+        echo "App name:         {{.APP}}  (from app-definition-template.yaml)"
+        echo "Version:          {{.VERSION}}  (from client/package.json)"
+        echo "Image:            {{.REGISTRY}}/{{.IMAGE}}:{{.VERSION}}"
+
+  bump:
+    desc: "Bump the version in client/package.json (patch by default; or: task bump -- minor)"
+    deps: [_project]
+    dir: '{{.PROJECT_DIR}}/client'
+    cmds:
+      - npm version {{.CLI_ARGS | default "patch"}} --no-git-tag-version
+
+  # --- Build the MFE and the container image -------------------------------------------
+
+  mfe:build:
+    desc: Build the client (as a production MFE) and the server
+    deps: [_project]
+    dir: '{{.PROJECT_DIR}}'
+    cmds:
+      - cd client && NODE_ENV=production npm run build:federation
+      - cd server && npm install && npm run build
+
+  image:
+    desc: Build, tag and push the container image to the sandbox registry
+    deps: [_project]
+    dir: '{{.PROJECT_DIR}}'
+    preconditions:
+      - sh: test -d "{{.PROJECT_DIR}}/client/dist" && test -d "{{.PROJECT_DIR}}/server/dist"
+        msg: "client/dist or server/dist is missing. Run `task mfe:build` first."
+    cmds:
+      - docker build --platform linux/amd64 -f "{{.ROOT_DIR}}/tools/prebuilt.Dockerfile" -t {{.IMAGE}}:{{.VERSION}} .
+      - docker tag {{.IMAGE}}:{{.VERSION}} {{.REGISTRY}}/{{.IMAGE}}:{{.VERSION}}
+      - docker push {{.REGISTRY}}/{{.IMAGE}}:{{.VERSION}}
+
+  # --- App definition -------------------------------------------------------------------
+
+  app:definition:
+    desc: Create app-definition.yaml from app-definition-template.yaml
+    deps: [_project]
+    dir: '{{.PROJECT_DIR}}'
+    cmds:
+      # App Center shows the readme and changelog. Create them if your project has none.
+      - test -f docs/readme.md || (mkdir -p docs && printf '%s\n' "# {{.APP}}" "" "A System Health dashboard for XProtect operators." > docs/readme.md)
+      - test -f docs/changelog.md || (mkdir -p docs && printf '%s\n' "## {{.VERSION}}" "" "- First version" > docs/changelog.md)
+      - |
+        awk -v v="{{.VERSION}}" -v repo="sandbox.io/{{.APP}}" '
+          /__README_BLOCK__|__CHANGELOG_BLOCK__/ {
+            f = /__README_BLOCK__/ ? "docs/readme.md" : "docs/changelog.md"
+            ind = substr($0, 1, index($0, "__") - 1)
+            while ((getline line < f) > 0) print ind line
+            close(f); next
+          }
+          { gsub(/__APP_DEFINITION_VERSION__/, v); gsub(/__DOCKER_VERSION__/, v); gsub(/__REPOSITORY__/, repo); print }
+        ' app-definition-template.yaml > app-definition.yaml
+      - grep 'image:' app-definition.yaml
+
+  # --- App Builder ----------------------------------------------------------------------
+  # These run exactly the app-builder commands you'd type yourself. App Builder reads
+  # app-definition.yaml in your project folder.
+
+  app:build:
+    desc: "app-builder build: validate app-definition.yaml and package the app as <app>-<version>.tgz"
+    deps: [_project]
+    dir: '{{.PROJECT_DIR}}'
+    preconditions:
+      - sh: test -f "{{.PROJECT_DIR}}/app-definition.yaml"
+        msg: "app-definition.yaml is missing. Run `task app:definition` first."
+    cmds:
+      - app-builder build
+
+  app:push:
+    desc: "app-builder push: upload the app package to the sandbox repository"
+    deps: [_project]
+    dir: '{{.PROJECT_DIR}}'
+    cmds:
+      - app-builder push
+
+  app:list:
+    desc: "app-builder list: list the apps in the sandbox repository"
+    deps: [_project]
+    dir: '{{.PROJECT_DIR}}'
+    cmds:
+      - app-builder list
+
+  app:install:
+    desc: "app-builder install-from-repo: install the app from the sandbox repository"
+    deps: [_project]
+    dir: '{{.PROJECT_DIR}}'
+    cmds:
+      - app-builder install-from-repo
+
+  app:status:
+    desc: "app-builder status: show the app's containers"
+    deps: [_project]
+    dir: '{{.PROJECT_DIR}}'
+    cmds:
+      - app-builder status
+
+  app:events:
+    desc: "app-builder events: show why an image can't be pulled or a container keeps restarting"
+    deps: [_project]
+    dir: '{{.PROJECT_DIR}}'
+    cmds:
+      - app-builder events
+
+  app:uninstall:
+    desc: "app-builder uninstall: remove the app from the App Platform"
+    deps: [_project]
+    dir: '{{.PROJECT_DIR}}'
+    cmds:
+      - app-builder uninstall
+
+  # --- Everything -----------------------------------------------------------------------
+
+  deploy:
+    desc: "Do everything: build the MFE, push the image, create the app definition, then app-builder build, push and install-from-repo"
+    deps: [_project]
+    cmds:
+      - task: mfe:build
+      - task: image
+      - task: app:definition
+      - task: app:build
+      - task: app:push
+      - task: app:install
