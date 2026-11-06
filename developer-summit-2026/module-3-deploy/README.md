@@ -11,7 +11,9 @@ Deploying an app takes two things:
 1. A **container image** with your MFE, pushed to the sandbox registry.
 2. An **app definition**, pushed to the App Platform, which tells it which image to run and where the MFE is.
 
-The workshop folder has a [`Taskfile.yml`](../Taskfile.yml) with [Task](https://taskfile.dev) tasks for every step. Task prints every command before it runs it, with your app name and version filled in, so you can see exactly what happens and run the same commands yourself next time. Watch the output: lines starting with `task: [...]` are the commands it runs.
+Each step takes several long commands with your app name and version in them. **You don't have to type them.** The workshop folder has a [`Taskfile.yml`](../Taskfile.yml) for [Task](https://taskfile.dev), so each step is one short command, such as `task image`, and Task runs the real commands for you.
+
+The tasks don't hide anything. Task **prints every command before it runs it**, with your app name and version filled in, and you see its output. Lines starting with `task: [...]` are the commands it runs. Read them as you go: they're the `docker` and `app-builder` commands you'd use to deploy without the Taskfile. Each step below also lists the commands its task runs.
 
 Run everything in a **new terminal**, so `npm start` from Module 2 keeps running: **Terminal → New Terminal** in the menu, or the **+** button in the terminal panel. A new terminal starts in the workshop folder. Go to your **project folder**:
 
@@ -40,7 +42,7 @@ This shows the app name, version and image name the tasks use. You don't have to
 task mfe:build
 ```
 
-This runs:
+This one command runs these commands for you, one after the other. You'll see each of them printed in the output:
 
 ```bash
 cd client && NODE_ENV=production npm run build:federation
@@ -57,7 +59,7 @@ The server hosts your MFE inside the container. You haven't needed it yet, so th
 task image
 ```
 
-This runs (with your app name and version filled in):
+This runs these commands for you, with your app name and version filled in:
 
 ```bash
 docker build --platform linux/amd64 -f ../tools/prebuilt.Dockerfile -t sandbox.io/<app>/<app>:<version> .
