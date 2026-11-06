@@ -13,7 +13,7 @@ Deploying an app takes two things:
 
 The workshop folder has a [`Taskfile.yml`](../Taskfile.yml) with [Task](https://taskfile.dev) tasks for every step. Task prints every command before it runs it, with your app name and version filled in, so you can see exactly what happens and run the same commands yourself next time. Watch the output: lines starting with `task: [...]` are the commands it runs.
 
-Run everything from your **project folder**. From the workshop folder:
+Run everything in a **new terminal**, so `npm start` from Module 2 keeps running: **Terminal → New Terminal** in the menu, or the **+** button in the terminal panel. A new terminal starts in the workshop folder. Go to your **project folder**:
 
 ```bash
 cd jd-health-dashboard    # your app name
@@ -113,7 +113,7 @@ This installs the version you just pushed from the sandbox repository onto the A
 
 ## Step 7: Check it in App Center
 
-Open **App Center** at <https://192.168.0.101/app-center> and log in with the credentials from your handout. Find your app among the sandbox apps and wait until it shows *Installed*.
+Open **App Center** at <https://192.168.0.101/app-center> and log in with the XProtect credentials from your handout. Find your app among the sandbox apps and wait until it shows *Installed*.
 
 > 💡 **Certificate warning?** The workshop servers use certificates from the workshop's own certificate authority, so your browser warns unless you've installed the workshop certificate. Either install it as described in [smart-client-certificate/README.md](../smart-client-certificate/README.md#browsers) and restart your browser, or accept the warning for this address (in Chrome or Edge: **Advanced → Continue to 192.168.0.101**).
 

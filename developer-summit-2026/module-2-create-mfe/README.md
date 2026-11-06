@@ -41,7 +41,16 @@ npm start
 
 > 💡 If `npm install` fails with a `401` error, your npm token has expired. Run `npm-auth` again (see Module 1, Step 5).
 
-Open <http://localhost:3003>. Leave it running: it reloads automatically while you work.
+Open <http://localhost:3003>. Leave the terminal and browser running: it reloads automatically while you work.
+
+> ⚠️ **Keep this terminal running `npm start`.** For the next modules, open a **new terminal** in VS Code. Use **either** of these:
+>
+> - **From the menu:** choose **Terminal → New Terminal**.
+> - **From the terminal panel:** click the **+** button at the top right of the panel.
+>
+> There's also a keyboard shortcut: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>&#96;</kbd> (<kbd>⌃</kbd>+<kbd>⇧</kbd>+<kbd>&#96;</kbd> on macOS) on a US keyboard. It differs with other keyboard layouts. The menu shows the right one for yours.
+>
+> Switch between your terminals in the list on the right of the terminal panel. A new terminal starts in the workshop folder.
 
 The file you'll mostly work on is `client/src/App.tsx`.
 
