@@ -195,7 +195,7 @@ Ask me clarifying questions and show me a short plan before you write code.
 1. Paste your prompt. Answer the agent's questions and review its plan before it writes code.
 2. Let it build **one step at a time**. After each step, check the result in the browser.
 3. Give specific feedback. *"Make the overall status bigger and use the success colour"* works better than *"make it nicer"*.
-4. When something works, commit it, so you can always roll back. Run `git init` once in your project folder, then `git add -A && git commit -m "..."`.
+"..."`.
 
 > ⏱️ After about 40 minutes, make sure you have something working to deploy. Polish can wait.
 
