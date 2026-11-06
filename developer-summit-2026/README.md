@@ -26,6 +26,7 @@ You build on your own laptop. We provide a shared App Platform, XProtect and (if
 
 ## 📚 Resources
 
+- [Developer Portal](https://portal.developer.milestonesys.com/)
 - [App Center Sample Applications](https://github.com/milestonesys/appcenter-samples)
 - [Developer Forum](https://developer.milestonesys.com)
 
