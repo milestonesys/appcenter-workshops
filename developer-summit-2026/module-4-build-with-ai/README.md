@@ -166,8 +166,29 @@ Ask me clarifying questions and show me a short plan before you write code.
 ```
 
 </details>
+</br>
 
-> **TODO:** Add a hint about which API to use for camera, device and server status.
+> 💡 **Which APIs give camera, device and server status?**
+> 
+>These are good places to start. Add the ones you use to your prompt:
+>
+> - **REST Config API**: the XProtect configuration, such as cameras, hardware and recording servers. See the [REST Config API reference](https://doc.developer.milestonesys.com/mipvmsapi/api/config-rest/v1/).
+> - **Events and State WebSocket API**: live events and the current state of cameras, devices and servers, e.g. whether they're online or offline. See the [Events and State WebSocket API reference](https://doc.developer.milestonesys.com/mipvmsapi/api/events-ws/v1/).
+> - **AI Bridge GraphQL API**: AI Bridge runs as the Processing Server on the App Platform. To browse its GraphQL API documentation, forward its port:
+>
+>   ```bash
+>   kubectl port-forward -n processing-server svc/aibridge-webservice 4000:4000
+>   ```
+>
+>   Then open <http://localhost:4000/>.
+>
+> **Or start with mock data.** You don't need the real APIs to build the UI. Have your agent mock them first, and add a way to switch between scenarios, so you can see how your app handles each one:
+>
+> - **Normal**: everything online.
+> - **Flaky**: devices go offline and come back, or some requests fail now and then.
+> - **Error**: the API can't be reached, or something is offline.
+>
+> For example, add to your prompt: *"Start with a mock implementation of the hook, with a scenario switch for normal, flaky and error, so I can test every state without a real system."* Swap in the real API later. The rest of the app doesn't change.
 
 ## Step 3: Plan, then build in small steps
 
