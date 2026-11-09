@@ -222,7 +222,6 @@ See **[🔁 Shipping a new version](../module-3-deploy/README.md#-shipping-a-new
 - [ ] Your agent can see the Milestone MCP server
 - [ ] At least Story 1 works in the browser
 - [ ] It looks like Milestone (MUI and design tokens, no hard-coded colours)
-- [ ] Your work is committed
 - [ ] Your new version runs in Smart Client
 
 ## Clean up
