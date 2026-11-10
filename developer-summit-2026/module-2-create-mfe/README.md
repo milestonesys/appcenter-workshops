@@ -23,7 +23,7 @@ Answer the prompts:
 | Port | `3003` |
 | API URL | Press **Enter** to keep the default, `http://localhost:8080` |
 
-> 💡 The API URL is only the target that requests to `/api` are forwarded to while you run the MFE locally with `npm start`. It doesn't affect deploying or running in Smart Client, where the MFE talks to the App Platform directly. You can change it later in `client/webpack.config.js` (the `proxy` section) if you want to test against real data locally. See the generated `client/README.md`.
+> 💡 You can set the API URL to `https://192.168.0.101` during the breakout session if you want to test against real data locally (using `npm run dev`). It doesn't affect deploying or running in Smart Client, where the MFE talks to the App Platform directly. You can change it later in `client/webpack.config.js` (the `proxy` section). See the generated `client/README.md`.
 
 This creates a project folder named after your app, e.g. `jd-health-dashboard/`, with a `client/` (the MFE) and a `server/` (the Express server that hosts it).
 
